@@ -1,10 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/public/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
 
 module.exports = {
   context: __dirname,
@@ -15,10 +9,11 @@ module.exports = {
   },
   devServer: {
     publicPath: '/public',
-    contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'app')]
+    //contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'app')]
   },
   resolve: {
-    extensions: ['.js', '.json']
+    modules: [path.resolve(__dirname, 'app'), 'node_modules'],
+    extensions: ['.js', '.json', '.jsx']
   },
   module: {
     loaders: [
@@ -40,5 +35,4 @@ module.exports = {
       }
     ]
   },
-  plugins: [HTMLWebpackPluginConfig]
 }
