@@ -19,6 +19,7 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.scss$/, loaders: ["style", "css", "sass"], exclude: /node_modules/ },
       { include: path.resolve(__dirname, 'js'), test: /\.jx$/, loader: 'babel-loader'},
       { include: path.resolve(__dirname, 'jsx'), test: /\.jsx$/, loader: 'babel-loader'},
       {
