@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Brd from './App'
+import BrdApp from './App'
 
-ReactDOM.render(<Brd />, document.getElementById('react-app'))
+ReactDOM.render(<BrdApp />, document.getElementById('react-app'))

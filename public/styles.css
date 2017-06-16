@@ -1,0 +1,72 @@
+.homeBg {
+  margin: 0;
+  background-image: url(assets/home/home-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 550px;
+  /*max-height: 550px;*/
+  width: 100%;
+  overflow: hidden;
+}
+
+.greyTint:before {
+  z-index: 0;
+  background: rgba(0,255,255,0.6);
+  transition: all .3s linear;
+}
+
+.greyTint {
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 1.0;
+}
+
+.mainText {
+  text-align: center;
+  color: whitesmoke;
+}
+
+.mainText h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 0;
+  padding-top: 75px;
+}
+
+.secondaryText {
+  text-align: center;
+  color: whitesmoke;
+}
+
+.secondaryText h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.categories {
+  padding-top: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: stretch;
+}
+
+.categories h3 {
+  text-decoration: underline;
+}
+
+.categories .category {
+  flex-grow: 1;
+  padding: 50px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
