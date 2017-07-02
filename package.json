@@ -10,6 +10,7 @@
   "author": "Nathan Miranda",
   "license": "UNLICENSED",
   "dependencies": {
+    "firebase": "^4.1.2",
     "path": "^0.12.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

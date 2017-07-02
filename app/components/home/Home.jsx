@@ -50,6 +50,9 @@ export default class Home extends React.Component {
             <h2>near <span style={{textDecoration: 'underline'}}>{this.state.location}</span></h2>
           </div>
         </div>
+        <div className='whatsNew'>
+          
+        </div>
       </div>
     )
   }

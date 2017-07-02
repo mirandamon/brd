@@ -25,6 +25,10 @@ export const theme = getMuiTheme({
     canvasColor: grey50,
     secondaryTextColor: darkBlack
   },
+  textField: {
+    hintColor: blueGrey300,
+    focusColor: blueGrey300
+  },
   raisedButton: {
     fontWeight: 300
   }
