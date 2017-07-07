@@ -34,7 +34,6 @@ export class Login extends React.Component {
       .login({ provider: 'google', type: 'popup' })
       .then(() => {
         this.setState({ loading: false })
-        console.log(this.props.firebase)
       })
       .catch((error) => {
         this.setState({ loading: false })
@@ -43,37 +42,37 @@ export class Login extends React.Component {
   }
 
   render () {
-    const { firebase } = this.props
-    if (!isLoaded(firebase.auth)) {
+    const { firebase, auth } = this.props
+    if (!isLoaded(auth)) {
       return (
         <ReactLoading type='cylon' color='#f44336' height='667' width='375' className='loading' />
       )
-    } else if (isEmpty(firebase.auth)) {
+    } else if (isEmpty(auth)) {
       return (
-      <div>
-        <h1 className='loginHeading'>It's good to see you again!</h1>
-        <form className='loginForm'>
-          <div className='loginGroup'>
-            <TextField floatingLabelText='Email' type='email' fullWidth />
-          </div>
-          <div className='loginGroup'>
-            <TextField floatingLabelText='Password' type='password' fullWidth />
-          </div>
-          <RaisedButton label='Login' secondary fullWidth style={{margin: 10}} />
-          <RaisedButton label='Login with Facebook'
-            icon={<FontIcon className='fa fa-facebook-official' />}
-            style={{margin: 10}}
-            backgroundColor='navy'
-            labelColor='white'
-            fullWidth />
-          <RaisedButton label='Login with Google'
-            icon={<FontIcon className='fa fa-google' />}
-            style={{margin: 10}}
-            backgroundColor='lightgrey'
-            onClick={this.googleLogin}
-            fullWidth />
-        </form>
-      </div>
+        <div>
+          <h1 className='loginHeading'>It's good to see you again!</h1>
+          <form className='loginForm'>
+            <div className='loginGroup'>
+              <TextField floatingLabelText='Email' type='email' fullWidth />
+            </div>
+            <div className='loginGroup'>
+              <TextField floatingLabelText='Password' type='password' fullWidth />
+            </div>
+            <RaisedButton label='Login' secondary fullWidth style={{margin: 10}} />
+            <RaisedButton label='Login with Facebook'
+              icon={<FontIcon className='fa fa-facebook-official' />}
+              style={{margin: 10}}
+              backgroundColor='navy'
+              labelColor='white'
+              fullWidth />
+            <RaisedButton label='Login with Google'
+              icon={<FontIcon className='fa fa-google' />}
+              style={{margin: 10}}
+              backgroundColor='lightgrey'
+              onClick={this.googleLogin}
+              fullWidth />
+          </form>
+        </div>
       )
     }
     return (
