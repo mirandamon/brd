@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from './components/navigation/NavBar'
 import Home from './components/home/Home'
 import Login from './components/login/Login'
+import Submit from './components/submit/Submit'
 import {
   BrowserRouter as Router,
   Route
@@ -30,6 +31,7 @@ export default class Brd extends React.Component {
           <NavBar currentUser={this.state.currentUser} />
           <Route exact path='/' component={Home} />
           <Route exact path='/login' render={() => <Login currentUser={currentUser} />} />
+          <Route exact path='/submit' component={Submit} />
         </div>
       </Router>
     )

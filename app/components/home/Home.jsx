@@ -1,5 +1,6 @@
 import React from 'react'
 import Categories from './Categories'
+import LatestArrivals from './LatestArrivals'
 
 const categories = [{name: 'housing', color: 'palevioletred'},
   {name: 'jobs', color: 'goldenrod'},
@@ -51,7 +52,7 @@ export default class Home extends React.Component {
           </div>
         </div>
         <div className='whatsNew'>
-          
+          {/*<LatestArrivals />*/}
         </div>
       </div>
     )
