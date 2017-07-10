@@ -107,25 +107,25 @@ class NavBar extends React.Component {
           />
           <MenuItem
             onTouchTap={this.handleClose}
-            leftIcon={<Home color='#e8a4ba' />} >
+            leftIcon={<Home color='#bf305e' />} >
             Housing
           </MenuItem>
           <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            leftIcon={<List color='#ecd28f' />}>
+            leftIcon={<List color='#CA6346' />}>
             Jobs
           </MenuItem>
           <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            leftIcon={<Group color='#f5f2d0' />}>
+            leftIcon={<Group color='#E8E191' />}>
             Community
           </MenuItem>
           <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            leftIcon={<Transaction color='#d5fdd5' />}>
+            leftIcon={<Transaction color='#74F974' />}>
             For Sale
           </MenuItem>
           <Divider />
@@ -137,14 +137,14 @@ class NavBar extends React.Component {
           <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            leftIcon={<People color='#a57fc0' />}>
+            leftIcon={<People color='#7F537C' />}>
             Personals
           </MenuItem>
-          <Divider  />
+          <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
             
-            leftIcon={<Service color='#f6c0f6' />}>
+            leftIcon={<Service color='#EC7DEC' />}>
             Services
           </MenuItem>
           <Divider  />
