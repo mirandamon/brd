@@ -18,6 +18,7 @@ import { firebaseConnect,
   isEmpty
 } from 'react-redux-firebase'
 import { Redirect } from 'react-router-dom'
+import profileStyles from './navigation.css'
 
 const handleTouchTap = () => {
   window.location.href = '/'
@@ -45,6 +46,7 @@ class NavBar extends React.Component {
 
   render () {
     const { firebase, auth } = this.props
+    console.log(auth)
     const rightElement = isEmpty(auth) ? (
       <div>
         <RaisedButton label='Log In' secondary style={{margin: 8, display: 'inline-block'}} href='/login' />
@@ -71,6 +73,19 @@ class NavBar extends React.Component {
             } />
       </div>
     )
+    const user = isEmpty(auth) ? null : (
+      <div className={profileStyles.content}>
+        <div className={profileStyles.card}>
+          <div className={profileStyles.firstinfo}>
+            <img src={auth.photoURL} />
+            <div className={profileStyles.profileinfo}>
+              <h1>{auth.displayName}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+
     return (
       <div>
         <AppBar
@@ -84,7 +99,7 @@ class NavBar extends React.Component {
           width={300}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
-          containerStyle={{background: '#505d71'}}
+          containerStyle={{overflowY: 'scroll'}}
         >
           <AppBar
             title={<span style={styles.title}>Brd</span>}
@@ -92,53 +107,48 @@ class NavBar extends React.Component {
           />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
             leftIcon={<Home color='#e8a4ba' />} >
             Housing
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
             leftIcon={<List color='#ecd28f' />}>
             Jobs
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
             leftIcon={<Group color='#f5f2d0' />}>
             Community
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
             leftIcon={<Transaction color='#d5fdd5' />}>
             For Sale
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
             leftIcon={<Music color='#7ff2f6' />}>
             Gigs
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
             leftIcon={<People color='#a57fc0' />}>
             Personals
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider  />
           <MenuItem
             onTouchTap={this.handleClose}
-            style={{color: '#bcc3d0'}}
+            
             leftIcon={<Service color='#f6c0f6' />}>
             Services
           </MenuItem>
-          <Divider style={{background: '#707f96'}} />
+          <Divider  />
+          {user}
         </Drawer>
       </div>
     )

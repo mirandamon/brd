@@ -30,6 +30,8 @@ module.exports = {
             { // if you need to configure a loader, it needs to be an object
               loader: 'css-loader',
               options: {
+                importLoaders: 1,
+                modules: true,
                 url: false // don't inline images
               }
             }
