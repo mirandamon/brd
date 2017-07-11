@@ -1,0 +1,13 @@
+.navigation {
+  display: flex;
+  margin: auto;
+  background: rgb(236, 239, 241);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  box-sizing: border-box;
+  padding-left: 24px;
+}
+
+.navigationCategory {
+  margin-right: 24px;
+  margin-bottom: 16px;
+}

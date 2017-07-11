@@ -1,6 +1,6 @@
 import React from 'react'
 import Categories from './Categories'
-import LatestArrivals from './LatestArrivals'
+import TrendingHousing from '../trending/TrendingHousing'
 
 const categories = [{name: 'housing', color: 'palevioletred'},
   {name: 'jobs', color: 'goldenrod'},
@@ -39,22 +39,23 @@ export default class Home extends React.Component {
 
   render () {
     return (
-      <div className='homeBg'>
-        <div className='greyTint'>
-          <div className='mainText'>
-            <h1>I am looking for</h1>
-          </div>
-          <div className='flex-container'>
-            <Categories categories={categories} />
-          </div>
-          <div className='secondaryText'>
-            <h2>near <span style={{textDecoration: 'underline'}}>{this.state.location}</span></h2>
-          </div>
-        </div>
-        <div className='whatsNew'>
-          {/*<LatestArrivals />*/}
-        </div>
-      </div>
+      <TrendingHousing />
+      // <div className='homeBg'>
+      //   <div className='greyTint'>
+      //     <div className='mainText'>
+      //       <h1>I am looking for</h1>
+      //     </div>
+      //     <div className='flex-container'>
+      //       <Categories categories={categories} />
+      //     </div>
+      //     <div className='secondaryText'>
+      //       <h2>near <span style={{textDecoration: 'underline'}}>{this.state.location}</span></h2>
+      //     </div>
+      //   </div>
+      //   <div className='whatsNew'>
+      //     {/*<LatestArrivals />*/}
+      //   </div>
+      // </div>
     )
   }
 }

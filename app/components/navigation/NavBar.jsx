@@ -1,17 +1,6 @@
 import React from 'react'
 import AppBar from 'material-ui/AppBar'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
-import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
-import Divider from 'material-ui/Divider'
-import Home from 'material-ui/svg-icons/action/home'
-import List from 'material-ui/svg-icons/action/list'
-import Group from 'material-ui/svg-icons/action/group-work'
-import People from 'material-ui/svg-icons/social/people'
-import Transaction from 'material-ui/svg-icons/action/compare-arrows'
-import Music from 'material-ui/svg-icons/image/music-note'
-import Service from 'material-ui/svg-icons/places/room-service'
 import { connect } from 'react-redux'
 import { firebaseConnect,
   pathToJS,
@@ -19,6 +8,7 @@ import { firebaseConnect,
 } from 'react-redux-firebase'
 import { Redirect } from 'react-router-dom'
 import profileStyles from './navigation.css'
+import navStyles from './navbar.css'
 
 const handleTouchTap = () => {
   window.location.href = '/'
@@ -54,14 +44,6 @@ class NavBar extends React.Component {
       </div>
     ) : (
       <div>
-        <FlatButton
-          label='Messages'
-          style={{margin: 8, display: 'inline-block'}}
-        />
-        <FlatButton
-          label='Help'
-          style={{margin: 8, display: 'inline-block'}}
-        />
         <RaisedButton
           label='Sign Out'
           secondary
@@ -91,65 +73,28 @@ class NavBar extends React.Component {
         <AppBar
           title={<span style={styles.title}>Brd</span>}
           onTitleTouchTap={handleTouchTap}
-          onLeftIconButtonTouchTap={this.handleToggle}
+          showMenuIconButton={false}
+          // onLeftIconButtonTouchTap={this.handleToggle}
           iconElementRight={rightElement}
+          zDepth={0}
         />
-        <Drawer
-          docked={false}
-          width={300}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({open})}
-          containerStyle={{overflowY: 'scroll'}}
-        >
-          <AppBar
-            title={<span style={styles.title}>Brd</span>}
-            showMenuIconButton={false}
-          />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            leftIcon={<Home color='#bf305e' />} >
+        <div className={navStyles.navigation}>
+          <div className={navStyles.navigationCategory}>
             Housing
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            leftIcon={<List color='#CA6346' />}>
+          </div>
+          <div className={navStyles.navigationCategory}>
             Jobs
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            leftIcon={<Group color='#E8E191' />}>
+          </div>
+          <div className={navStyles.navigationCategory}>
             Community
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            leftIcon={<Transaction color='#74F974' />}>
-            For Sale
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            leftIcon={<Music color='#7ff2f6' />}>
-            Gigs
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            leftIcon={<People color='#7F537C' />}>
+          </div>
+          <div className={navStyles.navigationCategory}>
+            Buy & Sell
+          </div>
+          <div className={navStyles.navigationCategory}>
             Personals
-          </MenuItem>
-          <Divider />
-          <MenuItem
-            onTouchTap={this.handleClose}
-            
-            leftIcon={<Service color='#EC7DEC' />}>
-            Services
-          </MenuItem>
-          <Divider  />
-          {user}
-        </Drawer>
+          </div>
+        </div>
       </div>
     )
   }
