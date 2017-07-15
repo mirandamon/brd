@@ -75,8 +75,16 @@ class NavBar extends React.Component {
           onRequestClose={this.handleClose}
         >
           <Menu>
-            <MenuItem primaryText='Settings' /> {/* onClick {this.setState({open: false}) */}
-            <MenuItem primaryText='Sign out' />
+            <MenuItem primaryText='Settings' />
+            <MenuItem 
+              primaryText='Sign out'
+              onTouchTap={() => {
+                this.setState({open: false})
+                this.props.firebase.logout()
+                .then(<Redirect to='/' />)
+              }
+            }
+            />
           </Menu>
         </Popover>
       </div>
