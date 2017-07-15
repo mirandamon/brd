@@ -1,6 +1,8 @@
 import React from 'react'
 import Categories from './Categories'
 import TrendingHousing from '../trending/TrendingHousing'
+import TrendingBuyAndSell from '../trending/TrendingBuyAndSell'
+import styles from './home.css'
 
 const categories = [{name: 'housing', color: 'palevioletred'},
   {name: 'jobs', color: 'goldenrod'},
@@ -39,7 +41,14 @@ export default class Home extends React.Component {
 
   render () {
     return (
-      <TrendingHousing />
+      <div>
+        <div className={styles.trending}>
+          <TrendingHousing />
+        </div>
+        <div className={styles.trending}>
+          <TrendingBuyAndSell />
+        </div>
+      </div>
       // <div className='homeBg'>
       //   <div className='greyTint'>
       //     <div className='mainText'>

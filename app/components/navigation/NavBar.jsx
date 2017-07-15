@@ -1,6 +1,11 @@
 import React from 'react'
 import AppBar from 'material-ui/AppBar'
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Popover from 'material-ui/Popover'
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
 import { firebaseConnect,
   pathToJS,
@@ -24,15 +29,21 @@ class NavBar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {open: false}
-    this.handleToggle = this.handleToggle.bind(this)
+    this.handleTouchTap = this.handleTouchTap.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
 
-  handleToggle () {
-    this.setState({open: !this.state.open})
+  handleTouchTap (event) {
+    event.preventDefault()
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    })
   }
 
-  handleClose () { this.setState({open: false}) }
+  handleClose () {
+    this.setState({open: false})
+  }
 
   render () {
     const { firebase, auth } = this.props
@@ -44,15 +55,30 @@ class NavBar extends React.Component {
       </div>
     ) : (
       <div>
-        <RaisedButton
-          label='Sign Out'
+        <FlatButton
+          label='Submit'
           secondary
-          style={{margin: 8, display: 'inline-block'}}
+          style={{margin: '8px', display: 'inline-block'}}
           onClick={() => {
             this.props.firebase.logout()
             .then(<Redirect to='/' />)
           }
             } />
+        <FloatingActionButton mini style={{margin: '8px'}} onTouchTap={this.handleTouchTap}>
+          <img src={auth.photoURL} />
+        </FloatingActionButton>
+        <Popover
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
+          onRequestClose={this.handleClose}
+        >
+          <Menu>
+            <MenuItem primaryText='Settings' /> {/* onClick {this.setState({open: false}) */}
+            <MenuItem primaryText='Sign out' />
+          </Menu>
+        </Popover>
       </div>
     )
     const user = isEmpty(auth) ? null : (

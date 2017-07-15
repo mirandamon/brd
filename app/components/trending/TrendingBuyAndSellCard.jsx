@@ -4,10 +4,10 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 
 const cardTitleStyle = {
   padding: 0,
-  marginTop: 4
+  marginTop: 8
 }
 
-export const TrendingHousingCard = (props) => {
+export const TrendingBuyAndSellCard = (props) => {
   return (
     <Card className={trendingStyles.card}>
       <CardMedia>
@@ -25,4 +25,4 @@ export const TrendingHousingCard = (props) => {
   )
 }
 
-export default TrendingHousingCard
+export default TrendingBuyAndSellCard
