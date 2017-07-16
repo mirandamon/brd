@@ -11,3 +11,10 @@
   margin-right: 24px;
   margin-bottom: 16px;
 }
+
+.header {
+  z-index: 999;
+  top: 0;
+  width: 100%;
+  position: fixed;
+}

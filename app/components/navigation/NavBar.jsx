@@ -55,15 +55,6 @@ class NavBar extends React.Component {
       </div>
     ) : (
       <div>
-        <FlatButton
-          label='Submit'
-          secondary
-          style={{margin: '8px', display: 'inline-block'}}
-          onClick={() => {
-            this.props.firebase.logout()
-            .then(<Redirect to='/' />)
-          }
-            } />
         <FloatingActionButton mini style={{margin: '8px'}} onTouchTap={this.handleTouchTap}>
           <img src={auth.photoURL} />
         </FloatingActionButton>
@@ -76,7 +67,7 @@ class NavBar extends React.Component {
         >
           <Menu>
             <MenuItem primaryText='Settings' />
-            <MenuItem 
+            <MenuItem
               primaryText='Sign out'
               onTouchTap={() => {
                 this.setState({open: false})
@@ -103,7 +94,7 @@ class NavBar extends React.Component {
     )
 
     return (
-      <div>
+      <div className={navStyles.header}>
         <AppBar
           title={<span style={styles.title}>Brd</span>}
           onTitleTouchTap={handleTouchTap}
