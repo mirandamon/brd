@@ -3,9 +3,12 @@ import NavBar from './components/navigation/NavBar'
 import Home from './components/home/Home'
 import Login from './components/login/Login'
 import Submit from './components/submit/Submit'
+import MyAccount from './components/account'
+import NotFound from './components/404'
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom'
 import { auth } from 'common/firebase'
 
@@ -29,9 +32,13 @@ export default class Brd extends React.Component {
       <Router>
         <div>
           <NavBar currentUser={this.state.currentUser} />
-          <Route exact path='/' component={Home} />
-          <Route exact path='/login' render={() => <Login currentUser={currentUser} />} />
-          <Route exact path='/submit' component={Submit} />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/login' render={() => <Login />} />
+            <Route exact path='/submit' component={Submit} />
+            <Route exact path='/account' component={MyAccount} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     )

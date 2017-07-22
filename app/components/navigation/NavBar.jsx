@@ -11,24 +11,20 @@ import { firebaseConnect,
   pathToJS,
   isEmpty
 } from 'react-redux-firebase'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import profileStyles from './navigation.css'
 import navStyles from './navbar.css'
 
-const handleTouchTap = () => {
-  window.location.href = '/'
-}
-
 const styles = {
   title: {
-    cursor: 'pointer'
+    color: 'black'
   }
 }
 
 class NavBar extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {open: false}
+    this.state = {open: false, redirect: false}
     this.handleTouchTap = this.handleTouchTap.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
@@ -66,13 +62,17 @@ class NavBar extends React.Component {
           onRequestClose={this.handleClose}
         >
           <Menu>
+            <Link to='/account' onClick={() => this.setState({open: false})}>
+              <MenuItem
+                primaryText='My Account' />
+            </Link>
             <MenuItem primaryText='Settings' />
             <MenuItem
               primaryText='Sign out'
               onTouchTap={() => {
                 this.setState({open: false})
                 this.props.firebase.logout()
-                .then(<Redirect to='/' />)
+                .then(this.setState({redirect: true}))
               }
             }
             />
@@ -92,12 +92,17 @@ class NavBar extends React.Component {
         </div>
       </div>
     )
-
+    const { redirect } = this.state
+    if (redirect) {
+      this.setState({redirect: false})
+      return (
+        <Redirect to='/' />
+      )
+    }
     return (
       <div className={navStyles.header}>
         <AppBar
-          title={<span style={styles.title}>Brd</span>}
-          onTitleTouchTap={handleTouchTap}
+          title={<Link to='/'><span style={styles.title}>Brd</span></Link>}
           showMenuIconButton={false}
           // onLeftIconButtonTouchTap={this.handleToggle}
           iconElementRight={rightElement}
