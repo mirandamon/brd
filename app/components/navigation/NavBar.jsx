@@ -51,6 +51,9 @@ class NavBar extends React.Component {
       </div>
     ) : (
       <div>
+        <div className={navStyles.postButton}>
+          <RaisedButton label='New Listing' secondary href='/post' />
+        </div>
         <FloatingActionButton mini style={{margin: '8px'}} onTouchTap={this.handleTouchTap}>
           <img src={auth.photoURL} />
         </FloatingActionButton>

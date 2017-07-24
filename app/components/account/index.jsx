@@ -5,80 +5,102 @@ import { firebaseConnect,
   pathToJS,
   isEmpty
 } from 'react-redux-firebase'
+import ReactLoading from 'react-loading'
+import { Redirect } from 'react-router-dom'
 
 var classNames = require('classnames')
 
 export class MyAccount extends React.Component {
   render () {
     const { profile, auth } = this.props
+    let content
     console.log(profile)
-    if (!profile || !auth) {
-      return null
-    }
+    if (profile === undefined || auth === undefined) {
+      content = (
+        <div className={styles.loading}>
+          <div className={styles.panelEffect}>
+            <div className={classNames(styles.fakeEffect, styles.fe0)} />
+            <div className={classNames(styles.fakeEffect, styles.fe1)} />
+            <div className={classNames(styles.fakeEffect, styles.fe2)} />
+            <div className={classNames(styles.fakeEffect, styles.fe3)} />
+            <div className={classNames(styles.fakeEffect, styles.fe4)} />
+            <div className={classNames(styles.fakeEffect, styles.fe5)} />
+            <div className={classNames(styles.fakeEffect, styles.fe6)} />
+            <div className={classNames(styles.fakeEffect, styles.fe7)} />
+            <div className={classNames(styles.fakeEffect, styles.fe8)} />
+            <div className={classNames(styles.fakeEffect, styles.fe9)} />
+            <div className={classNames(styles.fakeEffect, styles.fe10)} />
+            <div className={classNames(styles.fakeEffect, styles.fe11)} />
+          </div>
+        </div>
+      )
+    } else if (profile === null || auth === null) {
+      return (<Redirect to='/login' />)
+    } else {
+      content = (
+        <div>
+          <div className={styles.headerContainer}>
+            <img src='http://4vector.com/i/free-vector-modern-city_093317_bluecity.jpg' alt='profile background' className={styles.headerImage} />
+            <div className={styles.header}>
+              <h1 className={styles.mainHeading}>{profile.displayName}</h1>
+              <span className={styles.tag}>Actor</span>
+              <span className={styles.tag}>Producer</span>
+              <div className={styles.stats}>
+                <span className={styles.statModule}>
+                  Movies <span className={styles.statNumber}>56</span>
+                </span>
+                <span className={styles.statModule}>
+                  Plays <span className={styles.statNumber}>29</span>
+                </span>
+                <span className={styles.statModule}>
+                  Musicals <span className={styles.statNumber}>11</span>
+                </span>
+              </div>
+            </div>
+          </div>
 
-    return (
-      <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <img src={profile.photoURL} alt='profile background' className={styles.headerImage} />
-          <div className={styles.header}>
-            <h1 className={styles.mainHeading}>{profile.displayName}</h1>
-            <span className={styles.tag}>Actor</span>
-            <span className={styles.tag}>Producer</span>
-            <div className={styles.stats}>
-              <span className={styles.statModule}>
-                Movies <span className={styles.statNumber}>56</span>
+          <div className={styles.overlayHeader} />
+
+          <div className={styles.body}>
+            <img src={auth.photoURL} alt='profile picture' className={styles.bodyImage} />
+            <div className={classNames(styles.bodyActionButton, styles.uFlexCenter)}>
+              <svg fill='#ffffff' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z' />
+                <path d='M0 0h24v24H0z' fill='none' />
+              </svg>
+            </div>
+            <span className={styles.bodyStats}>Followers <span>3.5k</span></span>
+            <span className={styles.bodyStats}>Following <span>1.9k</span></span>
+            <div className={styles.uClearfix}></div>
+            <div className={styles.bodyInfo}>
+              <p>
+                Hugh Michael Jackman is an Australian actor, singer and producer. Jackman has won international recognition for his roles in variety of film genres.
+              </p>
+              <p>
+              In Broadway theatre, Jackman won a Tony Award for his role in The Boy from Oz. A four-time host of the Tony Awards themselves, he won an Emmy Award for one of these appearances. Jackman also hosted the 81st Academy Awards on 22 February 2009.
+              </p>
+            </div>
+            <div className={classNames(styles.card, styles.uClearfix)}>
+              <span className={styles.cardHeading}>Listings</span>
+              <span className={styles.cardMore}>
+                <svg fill='#777777' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'>
+                  <path d='M0 0h24v24H0z' fill='none'/>
+                  <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/>
+                </svg>
               </span>
-              <span className={styles.statModule}>
-                Plays <span className={styles.statNumber}>29</span>
-              </span>
-              <span className={styles.statModule}>
-                Musicals <span className={styles.statNumber}>11</span>
-              </span>
+              <ul className={styles.cardList}>
+                <li><img src='https://s12.postimg.org/c0ryp65lp/m1f.jpg' alt='' /></li>
+                <li><img src='https://s14.postimg.org/6ts0it3xt/m2f.jpg' alt='' /></li>
+                <li><img src='https://s13.postimg.org/ri499o2zr/m3f.jpg' alt='' /></li>
+              </ul>
             </div>
           </div>
         </div>
-
-        <div className={styles.overlayHeader} />
-
-        <div className={styles.body}>
-          <img src={auth.photoURL} alt='profile picture' className={styles.bodyImage} />
-          <div className={classNames(styles.bodyActionButton, styles.uFlexCenter)}>
-            <svg fill='#ffffff' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z' />
-              <path d='M0 0h24v24H0z' fill='none' />
-            </svg>
-          </div>
-          <span className={styles.bodyStats}>Followers <span>3.5k</span></span>
-          <span className={styles.bodyStats}>Following <span>1.9k</span></span>
-          <div className={styles.uClearfix}></div>
-          <div className={styles.bodyInfo}>
-            <p>
-              Hugh Michael Jackman is an Australian actor, singer and producer. Jackman has won international recognition for his roles in variety of film genres.
-            </p>
-            <p>
-            In Broadway theatre, Jackman won a Tony Award for his role in The Boy from Oz. A four-time host of the Tony Awards themselves, he won an Emmy Award for one of these appearances. Jackman also hosted the 81st Academy Awards on 22 February 2009.
-            </p>
-          </div>
-          <div className={styles.bodyMore}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div className={classNames(styles.card, styles.uClearfix)}>
-            <span className={styles.cardHeading}>Movies</span>
-            <span className={styles.cardMore}>
-              <svg fill='#777777' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'>
-                <path d='M0 0h24v24H0z' fill='none'/>
-                <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/>
-              </svg>
-            </span>
-            <ul className={styles.cardList}>
-              <li><img src='https://s12.postimg.org/c0ryp65lp/m1f.jpg' alt='' /></li>
-              <li><img src='https://s14.postimg.org/6ts0it3xt/m2f.jpg' alt='' /></li>
-              <li><img src='https://s13.postimg.org/ri499o2zr/m3f.jpg' alt='' /></li>
-            </ul>
-          </div>
-        </div>
+      )
+    }
+    return (
+      <div className={styles.container}>
+        {content}
       </div>
       // <div className={styles.background}>
       //   <aside className={styles.profileCard}>
