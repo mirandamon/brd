@@ -1,7 +1,7 @@
 .navigation {
   display: flex;
   margin: auto;
-  background: rgb(236, 239, 241);
+  background: #fff;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
   box-sizing: border-box;
   padding-left: 24px;
@@ -9,12 +9,22 @@
 
 .navigationCategory {
   margin-right: 24px;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+
+.navigationCategory:hover {
+  color: #696969
+}
+
+.activeNavigationCategory {
+  color: #f44336;
+  border-bottom: thin solid #f44336;
+  padding-bottom: 16px;
 }
 
 .postButton {
   display: inline;
-  vertical-align: 8px;
+  vertical-align: 10px;
   margin-right: 16px;
 }
 

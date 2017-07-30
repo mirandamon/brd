@@ -8,7 +8,7 @@ import { firebaseConnect,
 import ReactLoading from 'react-loading'
 import { Redirect } from 'react-router-dom'
 
-var classNames = require('classnames')
+const classNames = require('classnames')
 
 export class MyAccount extends React.Component {
   render () {

@@ -2,7 +2,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 import {
   grey50,
-  blueGrey50,
   blueGrey300,
   red500,
   red600,
@@ -16,7 +15,7 @@ export const theme = getMuiTheme({
     titleFontWeight: 300
   },
   palette: {
-    primary1Color: blueGrey50,
+    primary1Color: white,
     primary2Color: blueGrey300,
     textColor: darkBlack,
     alternateTextColor: white,

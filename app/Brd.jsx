@@ -5,6 +5,7 @@ import Login from './components/login/Login'
 import Submit from './components/submit/Submit'
 import MyAccount from './components/account'
 import NotFound from './components/404'
+import Post from './components/post'
 import {
   BrowserRouter as Router,
   Route,
@@ -37,6 +38,7 @@ export default class Brd extends React.Component {
             <Route exact path='/login' render={() => <Login />} />
             <Route exact path='/submit' component={Submit} />
             <Route exact path='/account' component={MyAccount} />
+            <Route exact path='/post' component={Post} />
             <Route component={NotFound} />
           </Switch>
         </div>

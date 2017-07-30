@@ -11,9 +11,12 @@ import { firebaseConnect,
   pathToJS,
   isEmpty
 } from 'react-redux-firebase'
+import { updateActiveView } from 'actions'
 import { Redirect, Link } from 'react-router-dom'
 import profileStyles from './navigation.css'
 import navStyles from './navbar.css'
+
+const classNames = require('classnames')
 
 const styles = {
   title: {
@@ -42,7 +45,7 @@ class NavBar extends React.Component {
   }
 
   render () {
-    const { firebase, auth } = this.props
+    const { firebase, auth, onPageChange, currentPage } = this.props
     console.log(auth)
     const rightElement = isEmpty(auth) ? (
       <div>
@@ -65,7 +68,10 @@ class NavBar extends React.Component {
           onRequestClose={this.handleClose}
         >
           <Menu>
-            <Link to='/account' onClick={() => this.setState({open: false})}>
+            <Link to='/account' onClick={() => {
+              this.setState({open: false})
+              onPageChange('')
+            }}>
               <MenuItem
                 primaryText='My Account' />
             </Link>
@@ -112,20 +118,35 @@ class NavBar extends React.Component {
           zDepth={0}
         />
         <div className={navStyles.navigation}>
-          <div className={navStyles.navigationCategory}>
-            Housing
+          <div className={classNames((currentPage === 'EXPLORE' && navStyles.activeNavigationCategory), navStyles.navigationCategory)}>
+            <Link to='/' onClick={() => onPageChange('EXPLORE')}>
+              Explore
+            </Link>
           </div>
-          <div className={navStyles.navigationCategory}>
-            Jobs
+          <div className={classNames((currentPage === 'HOUSING' && navStyles.activeNavigationCategory), navStyles.navigationCategory)}>
+            <Link to='/housing' onClick={() => onPageChange('HOUSING')}>
+              Housing
+            </Link>
           </div>
-          <div className={navStyles.navigationCategory}>
-            Community
+          <div className={classNames((currentPage === 'JOBS' && navStyles.activeNavigationCategory), navStyles.navigationCategory)}>
+            <Link to='/jobs' onClick={() => onPageChange('JOBS')}>
+              Jobs
+            </Link>
           </div>
-          <div className={navStyles.navigationCategory}>
-            Buy & Sell
+          <div className={classNames((currentPage === 'COMMUNITY' && navStyles.activeNavigationCategory), navStyles.navigationCategory)}>
+            <Link to='/community' onClick={() => onPageChange('COMMUNITY')}>
+              Community
+            </Link>
           </div>
-          <div className={navStyles.navigationCategory}>
-            Personals
+          <div className={classNames((currentPage === 'SHOP' && navStyles.activeNavigationCategory), navStyles.navigationCategory)}>
+            <Link to='/shop' onClick={() => onPageChange('SHOP')}>
+              Buy & Sell
+            </Link>
+          </div>
+          <div className={classNames((currentPage === 'PERSONALS' && navStyles.activeNavigationCategory), navStyles.navigationCategory)}>
+            <Link to='/personals' onClick={() => onPageChange('PERSONALS')}>
+              Personals
+            </Link>
           </div>
         </div>
       </div>
@@ -133,11 +154,21 @@ class NavBar extends React.Component {
   }
 }
 
-const mapStateToProps = ({firebase}) => ({
+const mapStateToProps = ({firebase, currentPage}) => ({
   auth: pathToJS(firebase, 'auth'),
-  profile: pathToJS(firebase, 'profile')
+  profile: pathToJS(firebase, 'profile'),
+  currentPage
 })
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onPageChange: pageName => {
+      dispatch(updateActiveView(pageName))
+    }
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(firebaseConnect()(NavBar))

@@ -1,4 +1,5 @@
-import { LOGIN, LOG_OUT, REGISTER } from './actions'
+import { LOGIN, LOG_OUT, REGISTER } from './login'
+import { UPDATE_ACTIVE_VIEW } from './currentPage'
 
 function login (authProvider) {
   return {
@@ -21,11 +22,20 @@ function register (authProvider) {
   }
 }
 
+function updateActiveView (activeView) {
+  return {
+    type: UPDATE_ACTIVE_VIEW,
+    activeView
+  }
+}
+
 export {
   login,
   logout,
   register,
+  updateActiveView,
   LOGIN,
   LOG_OUT,
-  REGISTER
+  REGISTER,
+  UPDATE_ACTIVE_VIEW
 }
