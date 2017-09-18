@@ -13,7 +13,7 @@ import { firebaseConnect,
 } from 'react-redux-firebase'
 import { updateActiveView } from 'actions'
 import { Redirect, Link } from 'react-router-dom'
-import profileStyles from './navigation.css'
+// import profileStyles from './navigation.css'
 import navStyles from './navbar.css'
 
 const classNames = require('classnames')
@@ -55,7 +55,7 @@ class NavBar extends React.Component {
     ) : (
       <div>
         <div className={navStyles.postButton}>
-          <RaisedButton label='New Listing' secondary href='/post' />
+          <Link to='/post' onClick={() => onPageChange('')}><RaisedButton label='New Listing' secondary /></Link>
         </div>
         <FloatingActionButton mini style={{margin: '8px'}} onTouchTap={this.handleTouchTap}>
           <img src={auth.photoURL} />
@@ -80,7 +80,7 @@ class NavBar extends React.Component {
               primaryText='Sign out'
               onTouchTap={() => {
                 this.setState({open: false})
-                this.props.firebase.logout()
+                firebase.logout()
                 .then(this.setState({redirect: true}))
               }
             }
@@ -89,18 +89,18 @@ class NavBar extends React.Component {
         </Popover>
       </div>
     )
-    const user = isEmpty(auth) ? null : (
-      <div className={profileStyles.content}>
-        <div className={profileStyles.card}>
-          <div className={profileStyles.firstinfo}>
-            <img src={auth.photoURL} />
-            <div className={profileStyles.profileinfo}>
-              <h1>{auth.displayName}</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+    // const user = isEmpty(auth) ? null : (
+    //   <div className={profileStyles.content}>
+    //     <div className={profileStyles.card}>
+    //       <div className={profileStyles.firstinfo}>
+    //         <img src={auth.photoURL} />
+    //         <div className={profileStyles.profileinfo}>
+    //           <h1>{auth.displayName}</h1>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // )
     const { redirect } = this.state
     if (redirect) {
       this.setState({redirect: false})
@@ -111,7 +111,7 @@ class NavBar extends React.Component {
     return (
       <div className={navStyles.header}>
         <AppBar
-          title={<Link to='/'><span style={styles.title}>Brd</span></Link>}
+          title={<Link to='/' onClick={() => onPageChange('EXPLORE')} ><span style={styles.title}>Brd</span></Link>}
           showMenuIconButton={false}
           // onLeftIconButtonTouchTap={this.handleToggle}
           iconElementRight={rightElement}
