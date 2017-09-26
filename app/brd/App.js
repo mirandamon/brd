@@ -4,18 +4,11 @@ import {
   Text,
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
+import Landing from './app/components/landing'
 
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome',
-  }
-  render() {
-    return <Text>Hello, Navigation!</Text>
-  }
-}
 
 const brd = StackNavigator({
-  Home: { screen: HomeScreen },
+  Home: { screen: Landing },
 })
 
 export default brd
