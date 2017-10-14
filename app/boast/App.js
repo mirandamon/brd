@@ -1,17 +1,18 @@
 import React from 'react'
 import {
   AppRegistry,
-  Text,
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import Landing from './app/components/landing'
 import Login from './app/components/login'
+import Register from './app/components/register'
 
 
 const boast = StackNavigator(
   {
     Home: { screen: Landing },
     Login: { screen: Login },
+    Register: { screen: Register },
   },
   {
     mode: 'modal',

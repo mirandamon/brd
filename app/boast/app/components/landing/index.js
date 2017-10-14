@@ -11,17 +11,22 @@ import { globals } from '../../styles/Globals'
 const styles = landingStyles
 
 export default class Landing extends React.Component {
-  constructor() {
-    super()
-    this.visitLogin = this.visitLogin.bind(this)
-  }
-
   static navigationOptions = {
     header: null,
   }
 
+  constructor() {
+    super()
+    this.visitLogin = this.visitLogin.bind(this)
+    this.visitRegister = this.visitRegister.bind(this)
+  }
+
   visitLogin() {
     this.props.navigation.navigate('Login')
+  }
+
+  visitRegister() {
+    this.props.navigation.navigate('Register')
   }
 
   render() {

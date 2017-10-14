@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Text,
   Keyboard,
   View
 } from 'react-native'
@@ -9,12 +8,11 @@ import { RoundButton } from 'react-native-button-component'
 import * as _ from 'lodash'
 import Colors from '../../styles/Colors'
 import { loginStyles } from '../../styles/Login'
-import { globals } from '../../styles/Globals'
 import firebase from '../../firebase/config'
 
 const styles = loginStyles
 
-export default class Landing extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -107,7 +105,6 @@ export default class Landing extends React.Component {
               onChangeText={this.onChangeText}
               autoCorrect={false}
               error={errors.username}
-
             />
             <TextField
               label='Password'
