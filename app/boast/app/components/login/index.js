@@ -88,7 +88,7 @@ export default class Login extends React.Component {
   render() {
     const { errors = {} } = this.state
     return (
-      <View>
+      <View style={{backgroundColor:'white', height: '100%'}}>
 
         <View style={{flexDirection:'column'}}>
           <View style={styles.topLogo} />
