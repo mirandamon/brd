@@ -10,6 +10,8 @@ import { TextField } from 'react-native-material-textfield'
 import { RoundButton } from 'react-native-button-component'
 import { registerStyles } from '../../styles/Register'
 import Colors from '../../styles/Colors'
+import firebase from '../../firebase/config'
+import * as _ from 'lodash'
 
 const styles = registerStyles
 
@@ -17,7 +19,64 @@ export default class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      errors: {}
+      errors: {},
+      registerButtonState: 'register'
+    }
+  }
+
+  onChangeText = (text) => {
+    let errors = _.merge({}, this.state.errors);
+    ['email', 'password', 'username'].map((field) => {
+      if (this[field].isFocused()) {
+        this.setState({ [field]: text })
+        errors[field] = ''
+        this.setState({ errors })
+      }
+    })
+  }
+
+  register = () => {
+    let errors = {}
+    this.setState({ registerButtonState: 'registering' })
+    if (!this.state.email) {
+      this.setState({ registerButtonState: 'register' })
+      errors.email = 'Email cannot be empty'
+      this.setState({ errors })
+    }
+    if (!this.state.username) {
+      this.setState({ registerButtonState: 'register' })
+      errors.username = 'Username cannot be empty'
+      this.setState({ errors })
+    }
+    if (!this.state.password) {
+      this.setState({ registerButtonState: 'register' })
+      errors.password = 'Password cannot be empty'
+      this.setState({ errors })
+    } 
+    if (!this.state.date) {
+      this.setState({ registerButtonState: 'register' })
+      errors.birthday = 'Password cannot be empty'
+      this.setState({ errors })
+    } else {
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() =>
+          this.setState({ loginButtonState: 'login' })
+        )
+        .catch(
+          (error) => {
+            const errorCode = error.code
+            const errorMessage = error.message
+            switch (errorCode) {
+              case 'auth/invalid-email':
+                errors.email = 'Please enter a valid email address.'
+                break
+              default:
+                errors.password = errorMessage
+            }
+            this.setState({ errors })
+            this.setState({ registerButtonState: 'register' })
+          }
+        )
     }
   }
 
@@ -89,10 +148,22 @@ export default class Register extends React.Component {
               />
               <View style={styles.facebookButton}>
                 <RoundButton
+                  buttonState={this.state.registerButtonState}
                   gradientStart={{ x: 0.5, y: 1 }}
                   gradientEnd={{ x: 1, y: 1 }}
                   backgroundColors={[Colors.brandPrimary, Colors.brandPrimaryDarker]}
-                  text="Sign up"
+                  states={{
+                    register: {
+                      onPress: () => {
+                        this.register()
+                      },
+                      text: 'Sign up'
+                    },
+                    registering: {
+                      spinner: true,
+                      text: 'Signing up'
+                    }
+                  }}
                 />
               </View>
               <View>

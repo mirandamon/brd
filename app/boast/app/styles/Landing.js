@@ -2,32 +2,22 @@ import { Dimensions, StyleSheet } from 'react-native';
 
 const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 
-
 export const landingStyles = StyleSheet.create({
   container: {
-    bottom: 0,
     flex: 1,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButton: {
-    flexDirection: 'row',
-    flex: 0.6,
-    height: 40,
-    bottom: 40,
-
-    paddingLeft: 15,
-    paddingRight: 15,
+    bottom: 120,
+    marginBottom: 24,
+    marginLeft: 16,
+    marginRight: 16
   },
   registerButton: {
-    flexDirection: 'row',
-    flex: 0.6,
-    height: 40,
-    bottom: 0,
-    paddingLeft: 15,
-    paddingRight: 15,
+    bottom: 120,
+    marginLeft: 16,
+    marginRight: 16
   },
   backgroundImage: {
     height: deviceHeight,
@@ -38,3 +28,5 @@ export const landingStyles = StyleSheet.create({
     width: 90,
   },
 });
+
+export default landingStyles

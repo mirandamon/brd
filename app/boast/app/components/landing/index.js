@@ -4,6 +4,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import { RoundButton } from 'react-native-button-component'
+import Colors from '../../styles/Colors'
 import Video from 'react-native-video'
 import { landingStyles } from '../../styles/Landing'
 import { globals } from '../../styles/Globals'
@@ -15,17 +17,11 @@ export default class Landing extends React.Component {
     header: null,
   }
 
-  constructor() {
-    super()
-    this.visitLogin = this.visitLogin.bind(this)
-    this.visitRegister = this.visitRegister.bind(this)
-  }
-
-  visitLogin() {
+  visitLogin = () => {
     this.props.navigation.navigate('Login')
   }
 
-  visitRegister() {
+  visitRegister = () => {
     this.props.navigation.navigate('Register')
   }
 
@@ -46,23 +42,23 @@ export default class Landing extends React.Component {
           style={styles.backgroundImage}
         />
 
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
+        <View style={styles.container}>
+          <RoundButton
+            gradientStart={{ x: 0.5, y: 1 }}
+            gradientEnd={{ x: 1, y: 1 }}
+            backgroundColors={[Colors.brandPrimary, Colors.brandPrimaryDarker]}
             onPress={this.visitLogin}
-            style={[globals.button, globals.inactive, styles.loginButton]}
-          >
-            <Text style={[globals.buttonText, globals.primaryText]}>
-                    Login
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            text="Login"
+            style={styles.loginButton}
+          />
+          <RoundButton
+            gradientStart={{ x: 0.5, y: 1 }}
+            gradientEnd={{ x: 1, y: 1 }}
+            backgroundColors={[Colors.brandPrimary, Colors.brandPrimaryDarker]}
             onPress={this.visitRegister}
-            style={[globals.button, styles.registerButton]}
-          >
-            <Text style={[globals.buttonText]}>
-                    Register
-            </Text>
-          </TouchableOpacity>
+            text="Register"
+            style={styles.registerButton}
+          />
         </View>
 
       </View>
