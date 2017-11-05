@@ -10,4 +10,6 @@ const config = {
 }
 
 const firebaseInstance = firebase.initializeApp(config)
+export const firebaseDb = firebaseInstance.database()
+
 export default firebaseInstance

@@ -10,7 +10,7 @@ import { TextField } from 'react-native-material-textfield'
 import { RoundButton } from 'react-native-button-component'
 import { registerStyles } from '../../styles/Register'
 import Colors from '../../styles/Colors'
-import firebase from '../../firebase/config'
+import firebase, { firebaseDb } from '../../firebase/config'
 import * as _ from 'lodash'
 
 const styles = registerStyles
@@ -20,7 +20,8 @@ export default class Register extends React.Component {
     super(props)
     this.state = {
       errors: {},
-      registerButtonState: 'register'
+      registerButtonState: 'register',
+      usernameTaken: false
     }
   }
 
@@ -35,37 +36,59 @@ export default class Register extends React.Component {
     })
   }
 
+  writeUserData = (username, birthday) => {
+    firebaseDb.ref(`users/${username}`).set({
+      birthday
+    })
+    firebaseDb.ref(`usernames/${username}`).set(true)
+  }
+
+  checkIfUsernameAlreadyExists = (username) => {
+    firebaseDb.ref(`usernames/${username}`).once('value')
+      .then((snapshot) => {
+        this.setState({ usernameTaken: snapshot.exists() })
+        console.log(snapshot.exists())
+      })
+  }
+
   register = () => {
     let errors = {}
+    this.checkIfUsernameAlreadyExists(this.state.username)
     this.setState({ registerButtonState: 'registering' })
     if (!this.state.email) {
       this.setState({ registerButtonState: 'register' })
       errors.email = 'Email cannot be empty'
       this.setState({ errors })
-    }
-    if (!this.state.username) {
+    } else if (!this.state.username) {
       this.setState({ registerButtonState: 'register' })
       errors.username = 'Username cannot be empty'
       this.setState({ errors })
-    }
-    if (!this.state.password) {
+    } else if (!this.state.password) {
       this.setState({ registerButtonState: 'register' })
       errors.password = 'Password cannot be empty'
       this.setState({ errors })
-    } 
-    if (!this.state.date) {
+    } else if (this.state.usernameTaken) {
+      this.setState({ registerButtonState: 'register' })
+      errors.username = 'This username is taken.'
+      this.setState({ errors })
+    } else if (!this.state.birthday) {
       this.setState({ registerButtonState: 'register' })
       errors.birthday = 'Password cannot be empty'
       this.setState({ errors })
     } else {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() =>
-          this.setState({ loginButtonState: 'login' })
-        )
+        .then(() => {
+          this.setState({ registerButtonState: 'register' })
+          const user = firebase.auth().currentUser
+          user.updateProfile({
+            displayName: this.state.username,
+          }).then(() => this.writeUserData(this.state.username, this.state.birthday))
+        })
         .catch(
           (error) => {
             const errorCode = error.code
             const errorMessage = error.message
+            console.log(error)
             switch (errorCode) {
               case 'auth/invalid-email':
                 errors.email = 'Please enter a valid email address.'
@@ -135,7 +158,7 @@ export default class Register extends React.Component {
                 error={errors.password}
               />
               <DatePicker
-                date={this.state.date}
+                date={this.state.birthday}
                 mode="date"
                 placeholder="Birthday"
                 format="YYYY-MM-DD"
@@ -143,7 +166,7 @@ export default class Register extends React.Component {
                 maxDate={new Date().toISOString().split('T')[0]}
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
-                onDateChange={(date) => {this.setState({date: date})}}
+                onDateChange={(birthday) => { this.setState({ birthday }) }}
                 showIcon={false}
               />
               <View style={styles.facebookButton}>
@@ -167,7 +190,9 @@ export default class Register extends React.Component {
                 />
               </View>
               <View>
-                <Text style={styles.legalStuff}>By signing up, you agree to the Terms of Service and Privacy Policy.</Text>
+                <Text style={styles.legalStuff}>
+                  By signing up, you agree to the Terms of Service and Privacy Policy.
+                </Text>
               </View>
             </View>
           </View>
