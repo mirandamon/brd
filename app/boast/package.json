@@ -15,7 +15,7 @@
 		"plist": "^2.1.0",
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.44.3",
-		"react-native-app-intro-v2": "^2.1.2",
+		"react-native-app-intro": "^1.1.5",
 		"react-native-button-component": "^0.1.25",
 		"react-native-datepicker": "^1.6.0",
 		"react-native-fbsdk": "^0.6.3",
@@ -27,9 +27,13 @@
 		"xcode": "^1.0.0"
 	},
 	"devDependencies": {
+		"assign-deep": "^0.4.6",
 		"babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
+		"babel-plugin-transform-async-to-generator": "^6.24.1",
+		"babel-preset-env": "^1.6.1",
+		"babel-preset-react-native-stage-0": "^1.0.1",
 		"jest": "21.2.1",
+		"react-native-swiper": "^1.5.13",
 		"react-test-renderer": "16.0.0-alpha.6"
 	},
 	"jest": {

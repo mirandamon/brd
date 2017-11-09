@@ -18,6 +18,7 @@ const styles = registerStyles
 export default class Register extends React.Component {
   constructor(props) {
     super(props)
+    this.checkIfUsernameAlreadyExists = this.checkIfUsernameAlreadyExists.bind(this)
     this.state = {
       errors: {},
       registerButtonState: 'register',
@@ -43,17 +44,16 @@ export default class Register extends React.Component {
     firebaseDb.ref(`usernames/${username}`).set(true)
   }
 
-  checkIfUsernameAlreadyExists = (username) => {
-    firebaseDb.ref(`usernames/${username}`).once('value')
-      .then((snapshot) => {
+  async checkIfUsernameAlreadyExists(username) {
+    await firebaseDb.ref(`usernames/${username}`).once('value')
+      .then(async (snapshot) => {
         this.setState({ usernameTaken: snapshot.exists() })
-        console.log(snapshot.exists())
       })
   }
 
-  register = () => {
+  register = async () => {
     let errors = {}
-    this.checkIfUsernameAlreadyExists(this.state.username)
+    await this.checkIfUsernameAlreadyExists(this.state.username)
     this.setState({ registerButtonState: 'registering' })
     if (!this.state.email) {
       this.setState({ registerButtonState: 'register' })
@@ -83,6 +83,7 @@ export default class Register extends React.Component {
           user.updateProfile({
             displayName: this.state.username,
           }).then(() => this.writeUserData(this.state.username, this.state.birthday))
+            .then(() => this.props.navigation.navigate('Welcome'))
         })
         .catch(
           (error) => {
