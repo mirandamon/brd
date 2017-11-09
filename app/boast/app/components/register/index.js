@@ -47,35 +47,36 @@ export default class Register extends React.Component {
   async checkIfUsernameAlreadyExists(username) {
     await firebaseDb.ref(`usernames/${username}`).once('value')
       .then(async (snapshot) => {
-        this.setState({ usernameTaken: snapshot.exists() })
+        this.setState({ usernameTaken: username && snapshot.exists() })
       })
   }
 
   register = async () => {
     let errors = {}
+    console.log(this.state.username)
     await this.checkIfUsernameAlreadyExists(this.state.username)
     this.setState({ registerButtonState: 'registering' })
     if (!this.state.email) {
       this.setState({ registerButtonState: 'register' })
       errors.email = 'Email cannot be empty'
       this.setState({ errors })
-    } else if (!this.state.username) {
+    } if (!this.state.username) {
       this.setState({ registerButtonState: 'register' })
       errors.username = 'Username cannot be empty'
       this.setState({ errors })
-    } else if (!this.state.password) {
+    } if (!this.state.password) {
       this.setState({ registerButtonState: 'register' })
       errors.password = 'Password cannot be empty'
       this.setState({ errors })
-    } else if (this.state.usernameTaken) {
+    } if (this.state.usernameTaken) {
       this.setState({ registerButtonState: 'register' })
       errors.username = 'This username is taken.'
       this.setState({ errors })
-    } else if (!this.state.birthday) {
+    } if (!this.state.birthday) {
       this.setState({ registerButtonState: 'register' })
-      errors.birthday = 'Password cannot be empty'
+      errors.birthday = 'Birthday cannot be empty'
       this.setState({ errors })
-    } else {
+    } if (_.isEmpty(errors)) {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {
           this.setState({ registerButtonState: 'register' })
