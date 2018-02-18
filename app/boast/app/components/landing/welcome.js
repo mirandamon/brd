@@ -16,7 +16,7 @@ export default class Welcome extends React.Component {
   }
 
   doneBtnHandle = () => {
-    Alert.alert('Done')
+    this.props.navigation.navigate('Loading')
   }
 
   nextBtnHandle = (index) => {
@@ -26,19 +26,19 @@ export default class Welcome extends React.Component {
   render() {
     const pageArray = [{
       title: 'Buying & Selling.',
-      description: 'Meets the 21st Century',
+      description: 'Meets the 21st century.',
       backgroundColor: '#fa931d',
       fontColor: '#fff',
       level: 10,
     }, {
-      title: 'You Own Your Feed.',
-      description: 'Curate your Collection',
+      title: 'Curate your Collection.',
+      description: 'You own your own feed.',
       backgroundColor: '#a4b602',
       fontColor: '#fff',
       level: 10,
     }, {
-      title: 'Your Stuff. Viral.',
-      description: 'Say Hi to 7.6 Billion People',
+      title: 'Your Stuff - Viral.',
+      description: 'Say hi to 7.6 billion people',
       backgroundColor: Colors.brandPrimaryDarker,
       fontColor: '#fff',
       level: 10,
